@@ -1,0 +1,37 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] azurerm_network_interface.nic" [label = "azurerm_network_interface.nic", shape = "box"]
+		"[root] azurerm_network_security_group.nsg" [label = "azurerm_network_security_group.nsg", shape = "box"]
+		"[root] azurerm_public_ip.pip" [label = "azurerm_public_ip.pip", shape = "box"]
+		"[root] azurerm_resource_group.rg" [label = "azurerm_resource_group.rg", shape = "box"]
+		"[root] azurerm_subnet.subnet" [label = "azurerm_subnet.subnet", shape = "box"]
+		"[root] azurerm_virtual_machine.VM" [label = "azurerm_virtual_machine.VM", shape = "box"]
+		"[root] azurerm_virtual_machine_extension.installweb" [label = "azurerm_virtual_machine_extension.installweb", shape = "box"]
+		"[root] azurerm_virtual_network.vnet" [label = "azurerm_virtual_network.vnet", shape = "box"]
+		"[root] provider.azurerm" [label = "provider.azurerm", shape = "diamond"]
+		"[root] var.location" [label = "var.location", shape = "note"]
+		"[root] var.password" [label = "var.password", shape = "note"]
+		"[root] var.usuario" [label = "var.usuario", shape = "note"]
+		"[root] azurerm_network_interface.nic" -> "[root] azurerm_public_ip.pip"
+		"[root] azurerm_network_interface.nic" -> "[root] azurerm_subnet.subnet"
+		"[root] azurerm_network_security_group.nsg" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_public_ip.pip" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_resource_group.rg" -> "[root] provider.azurerm"
+		"[root] azurerm_resource_group.rg" -> "[root] var.location"
+		"[root] azurerm_subnet.subnet" -> "[root] azurerm_virtual_network.vnet"
+		"[root] azurerm_virtual_machine.VM" -> "[root] azurerm_network_interface.nic"
+		"[root] azurerm_virtual_machine.VM" -> "[root] var.password"
+		"[root] azurerm_virtual_machine.VM" -> "[root] var.usuario"
+		"[root] azurerm_virtual_machine_extension.installweb" -> "[root] azurerm_virtual_machine.VM"
+		"[root] azurerm_virtual_network.vnet" -> "[root] azurerm_resource_group.rg"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_network_security_group.nsg"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_virtual_machine_extension.installweb"
+		"[root] provider.azurerm (close)" -> "[root] azurerm_network_security_group.nsg"
+		"[root] provider.azurerm (close)" -> "[root] azurerm_virtual_machine_extension.installweb"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider.azurerm (close)"
+	}
+}
+
