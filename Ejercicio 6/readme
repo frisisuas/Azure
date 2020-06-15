@@ -1,1 +1,2 @@
-SHS: protegiendo nuestras VMs mediante el uso de clave privada.
+Leer metadatos de las maquinas virtuales y acceder a diferentes recursos:
+https://docs.microsoft.com/en-us/azure/virtual-machines/windows/instance-metadata-service
